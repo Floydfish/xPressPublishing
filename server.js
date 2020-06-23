@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
+const apiRouter = require('api/api');
+
 const app = express();
 
 // The port the server is listening on
@@ -19,5 +21,8 @@ app.get('/', (req, res) => res.send("Starting the server"));
 app.listen(port, () => {
     console.log(`App listening at http://localhost:${port}`)
 });
+
+// Using the API router
+app.use('/api', apiRouter);
 
 module.exports = app;
