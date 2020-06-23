@@ -1,28 +1,35 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const errorHandler = require('errorhandler');
+const morgan = require('morgan');
 
-const apiRouter = require('api/api');
+const apiRouter = require('./api/api');
 
 const app = express();
 
 // The port the server is listening on
-const port = process.env.PORT || 4000;
+const PORT = process.env.PORT || 4000;
 
 // Using the body-parser JSON errorhandler
 app.use(bodyParser.json());
 
-// Using CORS middleware
+// Using CORS security thing
 app.use(cors());
 
-// Starting the server
-app.get('/', (req, res) => res.send("Starting the server"));
-
-app.listen(port, () => {
-    console.log(`App listening at http://localhost:${port}`)
-});
+// Using morgan to control the login
+app.use(morgan('dev'))
 
 // Using the API router
 app.use('/api', apiRouter);
+
+// Starting the server
+app.get('/', (req, res) => res.send("Love is in the air"));
+
+app.use(errorHandler());
+
+app.listen(PORT, () => {
+    console.log(`App listening at http://localhost:${PORT}`);
+});
 
 module.exports = app;
