@@ -24,7 +24,7 @@ app.use(morgan('dev'))
 app.use('/api', apiRouter);
 
 // Starting the server
-app.get('/', (req, res) => res.send("Love is in the air"));
+app.get('/', (req, res) => res.send("Starting the server"));
 
 app.use(errorHandler());
 
